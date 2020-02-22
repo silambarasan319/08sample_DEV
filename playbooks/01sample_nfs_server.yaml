@@ -1,0 +1,34 @@
+---
+- name: NFS Server Configuration
+  hosts: salem
+  tasks:
+    - name: Install software in 136.33
+      yum:
+        name: nfs-utils
+        state: latest
+    - name: Start the Service
+      service: 
+        name: nfs-server
+        state: started 
+    - name: Enable the NFS-SERVER service
+      service:
+        name: nfs-server
+        enabled: yes
+    - name: Create share
+      file:
+        path: /developer
+        state: directory
+    - name: To add Content in Exports
+      lineinfile:
+        path: /etc/exports
+        line: "/developer 192.168.136.34(ro)"
+    - name: Exports to OS
+      shell: | 
+         exportfs –r
+    - name: To allow NFS in Firewall
+      firewalld:
+        service: nfs
+        state: enabled
+        immediate: yes
+        permanent: yes
+...

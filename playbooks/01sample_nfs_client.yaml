@@ -1,0 +1,16 @@
+---
+ - name: NFS Client Configuration
+   hosts: chennai
+   tasks:
+     - name: Install NFS client software
+       file:
+         path: /facebook
+         state: directory
+     - name: Mount in /etc/fstab
+       mount:
+         src: 192.168.136.33:/developer
+         path: /redhat
+         fstype: nfs
+         state: mounted
+...
+        
