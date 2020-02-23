@@ -1,6 +1,9 @@
 ---
 - name: NFS Server Configuration
   hosts: salem
+  vars:
+    name_pkg: nfs-utils
+    name_service: nfs-server 
   tasks:
     - name: Install software in 136.33
       yum:
@@ -19,8 +22,7 @@
         enabled: yes
     - name: Create share
       file:
-        path: 
-          - "{{name_path}}"
+        path: /developer
         state: directory
     - name: To add Content in Exports
       lineinfile:

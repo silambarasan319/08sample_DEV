@@ -4,23 +4,19 @@
   tasks:
     - name: Install software in 136.33
       yum:
-        name:
-          - "{{name_pkg}}"
+        name: nfs-utils
         state: latest
     - name: Start the Service
       service: 
-        name:
-          - "{{name_service}}"
+        name: nfs-server
         state: started 
     - name: Enable the NFS-SERVER service
       service:
-        name:
-          - "{{name_service}}"
+        name: nfs-server
         enabled: yes
     - name: Create share
       file:
-        path: 
-          - "{{name_path}}"
+        path: /developer
         state: directory
     - name: To add Content in Exports
       lineinfile:
